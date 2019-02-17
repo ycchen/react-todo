@@ -1,12 +1,15 @@
 import React from 'react'
 
-export default function Todo() {
+export default function Todo({todo: {text, id}, onDelete}) {
   return (
     <div>
-      <a href="#" 
+      <a
         className="list-group-item" 
-        onClick={() => {console.log('clicked')}}>
-          Todo 1: test
+        onClick={() => {
+          console.log('clicked')
+          onDelete(id)
+        }}>
+          {text}: {id}
       </a>
     </div>
   )

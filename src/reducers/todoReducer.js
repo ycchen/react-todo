@@ -9,7 +9,9 @@ export default function todoReducer(state = [], action) {
     case ADD_TODO:
       return [...state, action.payload]
     case DELETE_TODO:
-      return state.filter(todo => todo.id !== action.payload.id)
+      return (
+        state.filter(todo => todo.id !== action.payload.todo.id)
+      ) 
     case FETCH_TODO:
       return action.todos
     default:

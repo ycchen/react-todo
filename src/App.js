@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Title from './components/Title'
 import TodoForm from './containers/TodoForm'
+import TodoList from './containers/TodoList'
 
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
       <div className="App">
         <Title />
         <TodoForm />
+        <TodoList />
       </div>
     );
   }

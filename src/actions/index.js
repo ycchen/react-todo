@@ -9,7 +9,6 @@ import axios from 'axios'
 const apiUrl = 'https://57b1924b46b57d1100a3c3f8.mockapi.io/api/todos'
 
 export const createTodo =({todo}) =>{
-  console.log('createTodo got called')
   return(dispatch) => {
     return axios.post(apiUrl, {text: todo})
       .then(respone => {
@@ -26,8 +25,31 @@ export const createTodoSuccess = (data) => {
   return {
     type: ADD_TODO,
     payload: {
-      _id: data._id,
+      id: data.id,
       text: data.text
+    }
+  }
+}
+
+
+export const deleteTodo = id => {
+  return (dispatch) => {
+    return axios.delete(`${apiUrl}/${id}`)
+      .then(response => {
+        dispatch(deleteTodoSuccess(response.data))
+      })
+      .catch(error => {
+        throw(error)
+      })
+  }
+}
+
+
+export const deleteTodoSuccess = id => {
+  return {
+    type: DELETE_TODO,
+    payload: {
+      todo: id
     }
   }
 }
