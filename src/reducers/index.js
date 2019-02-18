@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import todos from './todoReducer'
+import todoReducer from './todoReducer'
 
 export default combineReducers({
-  todos: todos
+  todoStore: todoReducer
 })

@@ -71,4 +71,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 #### add libraries
 ```
   `npm install --save redux react-redux redux-thunk redux-saga`
+  `npm install --save react-router-dom`
+  `npm install --save semantic-ui-react`
 ```
