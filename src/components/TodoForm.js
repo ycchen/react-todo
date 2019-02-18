@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import Title from './Title'
 class TodoForm extends Component {
   state = {
     todo: ''
@@ -31,9 +31,10 @@ class TodoForm extends Component {
   render() {
     return (
       <div>
+        <Title />
         <form onSubmit={ this.handleSubmit }>
         <input 
-          className="form-control col-md-12"
+          className="form-control"
           type="text"
           placeholder="Todo name"
           name="todo"
