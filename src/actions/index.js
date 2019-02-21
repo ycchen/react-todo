@@ -6,12 +6,14 @@ import {
 
 import axios from 'axios'
 
-const apiUrl = 'https://57b1924b46b57d1100a3c3f8.mockapi.io/api/todos'
+// const apiUrl = 'https://57b1924b46b57d1100a3c3f8.mockapi.io/api/todos'
+const apiUrl = 'https://5c6ac9b9d98e3600141cab70.mockapi.io/api/todos'
 
 export const createTodo =({todo}) =>{
   return(dispatch) => {
     return axios.post(apiUrl, {text: todo})
       .then(respone => {
+        console.log('after saved todo =======', respone.data)
         dispatch(createTodoSuccess(respone.data))
       })
       .catch(error => {
@@ -45,7 +47,7 @@ export const deleteTodo = id => {
 }
 
 
-export const deleteTodoSuccess = id => {
+export const deleteTodoSuccess = (id) => {
   return {
     type: DELETE_TODO,
     payload: {
@@ -58,6 +60,7 @@ export const fetchAllTodos = () => {
   return (dispatch) => {
     return axios.get(apiUrl)
       .then(response => {
+        console.log('====fetchTodos==Resp', response.data)
         dispatch(fetchTodos(response.data))
       })
       .catch(error => {
@@ -67,8 +70,9 @@ export const fetchAllTodos = () => {
 }
 
 export const fetchTodos = (todos) => {
+  console.log('========fetchTodos action===== ', todos)
   return {
     type: FETCH_TODO,
-    todos
+    payload: todos
   }
 }

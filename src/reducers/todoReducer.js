@@ -4,16 +4,41 @@ import {
   FETCH_TODO
 } from '../types'
 
-export default function todoReducer(state = [], action) {
+const defaultState = {
+  todos: [],
+  todo: {},
+  loading: false,
+  errors: {}
+}
+export default function todoReducer(state = defaultState, action) {
   switch(action.type) {
     case ADD_TODO:
-      return [...state, action.payload]
+    console.log('===ADD_TODO===', action.payload)
+    console.log('===current state===', state)
+      return {
+        ...state, 
+        todo: {},
+        todos: [...state.todos, action.payload],
+        errors: {},
+        loading: false
+      }
     case DELETE_TODO:
-      return (
-        state.filter(todo => todo.id !== action.payload.todo.id)
-      ) 
+    console.log('===DELETE_TODO===', action.payload)
+    console.log('===current state===', state)
+      return {
+        ...state,
+        todos: state.todos.filter(item => item.id !== action.payload.todo.id)
+      } 
     case FETCH_TODO:
-      return action.todos
+    console.log('===FETCH_TODO===')
+    console.log('===action.payload===', action.payload)
+    console.log('===current state===', state)
+      return {
+        ...state,
+        todos: action.payload,
+        loading: false,
+        errors: {}
+      }
     default:
       return state
   }
