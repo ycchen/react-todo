@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { createTodo, fetchAllTodos, deleteTodo } from '../actions'
 import TodoForm from '../components/TodoForm'
 import TodoList from '../components/TodoList'
+import { bindActionCreators } from 'redux'
 class TodoPage extends React.Component {
   componentDidMount() {
     this.props.fetchAllTodos()
@@ -22,7 +23,7 @@ class TodoPage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   console.log('state inside of mapStateToProps', state)
   return{
     todos: state.todoStore.todos,
@@ -31,8 +32,21 @@ function mapStateToProps(state) {
   } 
 }
 
+// const mapDispatchToProps = {
+//   fetchAllTodos,
+//   createTodo,
+//   deleteTodo
+// }
 
-export default connect(mapStateToProps, {fetchAllTodos, createTodo, deleteTodo})(TodoPage)
+const mapDispatchToProps= (dispatch) => {
+  return {
+    ...bindActionCreators(
+      {fetchAllTodos, createTodo, deleteTodo},
+      dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoPage)
 
 
 
