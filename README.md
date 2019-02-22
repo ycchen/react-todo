@@ -73,4 +73,24 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
   `npm install --save redux react-redux redux-thunk redux-saga`
   `npm install --save react-router-dom`
   `npm install --save semantic-ui-react`
+  `npm install --save-dev redux-devtools-extension`
 ```
+
+#### Redux
+
+- Create Store
+```
+import { createStore, applyMiddleware } from 'redux'
+import { rootReducer } from './rootReducer'
+import { composeWithDevTools } from 'redux-devtools-extension'
+}
+const store = createStroe(
+  rootReducer,
+  composeWithDevTools(
+    applyMiddleware(thunk)
+  )
+)
+```
+
+- Apply Middlewares
+- Provider
