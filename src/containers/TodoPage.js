@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createTodo, fetchAllTodos, deleteTodo } from '../actions'
+import { createTodo, fetchAllTodos, deleteTodo } from '../actions/todoActions'
 import TodoForm from '../components/TodoForm'
 import TodoList from '../components/TodoList'
 import { bindActionCreators } from 'redux'

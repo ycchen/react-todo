@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-
-export default class ContactPage extends Component {
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchAllContacts } from '../actions/contactActions'
+class ContactPage extends Component {
   render() {
     return (
       <div>
@@ -9,3 +11,12 @@ export default class ContactPage extends Component {
     )
   }
 }
+
+
+const mapDispatchToProps = (disptach) => {
+  return{
+    ...bindActionCreators({ fetchAllContacts }, disptach)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ContactPage)
