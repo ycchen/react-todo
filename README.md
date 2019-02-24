@@ -74,6 +74,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
   `npm install --save react-router-dom`
   `npm install --save semantic-ui-react`
   `npm install --save-dev redux-devtools-extension`
+  `npm install --save react-motion`
+  `npm install --save lodash`
 ```
 
 #### Redux

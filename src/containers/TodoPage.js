@@ -15,7 +15,7 @@ class TodoPage extends React.Component {
     return (
       <div>
         <h1>Todo Page</h1>
-        <h3>Todos ({this.props.todos.length})</h3>
+        <h4>Todos ({this.props.todos.length})</h4>
         <TodoForm addTodo={this.props.createTodo} />
         There are {this.props.todos.length} todos
         <TodoList todos={this.props.todos} deleteTodo={this.props.deleteTodo} />

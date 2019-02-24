@@ -9,7 +9,15 @@ export default function contactReducer(state = initialState.contactState, action
     case 'EDIT_CONTACT':
       return state
     case 'FETCH_CONTACT':
-      return state
+    console.log('===FETCH_CONTACT===')
+    console.log('===action.payload===', action.payload)
+    console.log('===current state===', state)
+      return {
+        ...state,
+        contacts: action.payload,
+        loading: false,
+        errors: {}
+      }
     default:
       return state
   }
