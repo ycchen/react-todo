@@ -5,7 +5,11 @@ export default function contactReducer(state = initialState.contactState, action
     case 'ADD_CONTACT':
     return state
     case 'DELETE_CONTACT':
-      return state
+    const id = action.payload.contact.id
+      return {
+        ...state,
+        contacts: state.contacts.filter(item => item.id !== id)
+      }
     case 'EDIT_CONTACT':
       return state
     case 'FETCH_CONTACT':

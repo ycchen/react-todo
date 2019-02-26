@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchAllContacts } from '../actions/contactActions'
+import { fetchAllContacts, deleteContact } from '../actions/contactActions'
 import ContactList from '../components/ContactList'
 
 class ContactPage extends Component {
@@ -16,7 +16,7 @@ class ContactPage extends Component {
       <div>
         <h1>Contact Page</h1>
         <h4>Contacts ({this.props.contacts.length})</h4>
-        <ContactList contacts={this.props.contacts} />
+        <ContactList contacts={this.props.contacts} deleteContact={this.props.deleteContact} />
       </div>
     )
   }
@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (disptach) => {
   return{
-    ...bindActionCreators({ fetchAllContacts }, disptach)
+    ...bindActionCreators({ fetchAllContacts, deleteContact }, disptach)
   }
 }
 

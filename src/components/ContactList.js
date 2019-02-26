@@ -2,13 +2,13 @@ import React from 'react'
 import ContactCard from './ContactCard'
 import { Card } from 'semantic-ui-react'
 
-export default function ContactList({contacts}) {
+export default function ContactList({contacts, deleteContact}) {
   console.log('Inside of ContactList contacts', contacts.length);
 
   const cards = () => {
     return contacts.map( contact => {
       return (
-        <ContactCard key={contact.id} contact={contact} />
+        <ContactCard key={contact.id} contact={contact} deleteContact={deleteContact} />
       )
     })
   }
