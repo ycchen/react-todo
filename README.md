@@ -77,6 +77,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
   `npm install --save-dev redux-devtools-extension`
   
   `npm install --save lodash`
+  `npm install --only=dev jest babel-jest babel-preset-env babel-preset-react react-test-renderer`
 ```
 
 #### Redux

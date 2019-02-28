@@ -21,8 +21,33 @@ export const fetchAllContacts = () => {
 export const fetchContacts = (contacts) => {
   console.log('========fetchContacts action===== ', contacts)
   return {
-    type: 'FETCH_CONTACT',
+    type: 'FETCH_CONTACTS',
     payload: contacts
+  }
+}
+
+export const fetchContact = (id) => {
+  console.log('========fetchContact action===== ', id)
+  return (dispatch) => {
+    return axios.get(`${apiUrl}/${id}`)
+      .then(response => {
+        console.log('get contact', response.data);
+        dispatch(fetchContactSuccess(response.data))
+      })
+      .catch(error => {
+        console.log('get cotnact error', error);
+        throw(error)
+      })
+    
+  }
+}
+
+export const fetchContactSuccess = (contact) => {
+  console.log('========fetchContactSuccess action===== ', contact)
+  return {
+    type: 'FETCH_CONTACT',
+    payload: contact
+    
   }
 }
 

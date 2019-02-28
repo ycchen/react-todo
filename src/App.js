@@ -3,6 +3,8 @@ import { NavLink, BrowserRouter, Route } from 'react-router-dom'
 import TodoPage from './containers/TodoPage'
 import { Container } from 'semantic-ui-react';
 import ContactPage from './containers/ContactPage'
+import ContactFormPage from './containers/ContactFormPage'
+
 class App extends Component {
   render() {
     return (
@@ -12,9 +14,11 @@ class App extends Component {
             <NavLink className="item" activeClassName="active" exact to="/">Todos List</NavLink>
             {/* <NavLink className="item" activeClassName="active" exact to="/todos/new">Add Todo</NavLink> */}
             <NavLink className="item" activeClassName="active" exact to="/contacts">Contacts List</NavLink>
+            {/* <NavLink className="item" activeClassName="active" exact to="/contacts/new">Add Contact</NavLink> */}
           </div>
-          <Route exact path="/" component={TodoPage}/>
-          <Route exact path="/contacts" component={ContactPage}/>
+          <Route exact path="/" component={TodoPage} />
+          <Route exact path="/contacts" component={ContactPage} />
+          <Route exact path="/contacts/edit/:id" component={ContactFormPage} />
         </Container>
       </BrowserRouter>
     );
