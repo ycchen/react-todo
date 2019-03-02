@@ -34,6 +34,18 @@ export const newContact = () => {
   }
 }
 
+export const saveContact = (contact) => {
+  return (dispatch) => {
+    return axios.post(apiUrl, contact)
+      .then(response => {
+        dispatch({ type: 'SAVE_CONTACT', payload: contact})
+      })
+      .catch(error => {
+        throw(error)
+      })
+    
+  }
+}
 export const fetchContact = (id) => {
   console.log('========fetchContact action===== ', id)
   return (dispatch) => {

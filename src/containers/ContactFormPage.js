@@ -1,10 +1,16 @@
 import React from 'react'
 import ContactForm from '../components/ContactForm'
 import { connect } from 'react-redux'
-import { fetchContact, newContact } from '../actions/contactActions'
+import { fetchContact, newContact, saveContact, updateContact } from '../actions/contactActions'
 import { bindActionCreators } from 'redux'
+import { SubmissionError } from 'redux-form'
+import { Redirect } from 'react-router'
 
 class ContactFormPage extends React.Component {
+  state = {
+    redirect: false
+  }
+
   componentDidMount = () => {
     const { id } = this.props.match.params
     console.log('this.props.match.params', this.props.match.params)
@@ -14,14 +20,30 @@ class ContactFormPage extends React.Component {
       this.props.newContact()
     }
   }
- 
+  
+  submit = (contact) => {
+    if(!contact.id){
+      console.log('create new add contact')
+      console.log('!contact.id', !contact.id);
+      return this.props.saveContact(contact)
+        .then(response => this.setState({ redirect: true}))
+        .catch(error => {
+          throw new SubmissionError(this.props.errors)
+        })
+    } else {
+      console.log(`update existing contact ${contact.id}`)
+    }
+  }
   render() {
     console.log('contactFormPage props',this.props);
     console.log('this.props.contact',this.props.contact);
-    
     return (
       <div>
-        <ContactForm contact={this.props.contact}/>
+        {
+          this.state.redirect?
+          <Redirect to="/contacts" /> :
+          <ContactForm contact={this.props.contact} onSubmit={this.submit} />
+        }
       </div>
     )
   }
@@ -45,7 +67,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return (
     bindActionCreators(
-      {fetchContact, newContact}, 
+      {fetchContact, newContact, saveContact}, 
       dispatch
     )
   )

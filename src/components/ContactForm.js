@@ -5,7 +5,7 @@ import { Form, Grid, Button } from 'semantic-ui-react';
 // decompose `values` to {firstName, lastName, phone, and email}
 // set default as empty firstName=''
 // {firstName='', lastName='', phone='', email=''}
-const submit = (values) => {
+const validate = (values) => {
   let errors = {}
   let isError = false
 
@@ -22,18 +22,28 @@ const submit = (values) => {
     isError = true
   }
 
-  if (isError) {
-    throw new SubmissionError(errors)
-  } else {
-    console.log('valid submission')
-    console.log(values)
-  }
-  // return errors
+  // if (isError) {
+  //   throw new SubmissionError(errors)
+  // } else {
+  //   console.log('valid submission')
+  //   console.log(values)
+  // }
+  return errors
 }
 // decompose props field to { input, label, type, meta: {touched, error}}
 
 class ContactForm extends Component {
   
+  componentWillReceiveProps = (nextProps) => { // load contact asynchronously
+    const { contact } = nextProps
+    console.log('inside of componentWillReceiveProps')
+    console.log('this.props',this.props);
+    console.log('nextProps',nextProps);
+    
+    if(contact.id !== this.props.contact.id) { // Initialize form only once
+      this.props.initialize(contact)
+    }
+  }
   renderField = ({input, label, type, meta: { touched, error}}) => (
     <Form.Field className={{error:touched && error}}>
       <label>{label}</label>
@@ -43,11 +53,12 @@ class ContactForm extends Component {
   )
 
   render() {
-    const { handleSubmit } = this.props
+    const { handleSubmit, contact } = this.props
     return (
       <Grid centered columns={2}>
         <Grid.Column>
-        <Form onSubmit={handleSubmit(submit)}>
+        <h1 style={{marginTop: "1em"}}>{ contact.id ? 'Edit Contact' : 'Add New Contact'}</h1>
+        <Form onSubmit={handleSubmit}>
           <Form.Group widths='equal'>
             <Field name="firstName" label="First Name" component={this.renderField} type="text"/>
             <Field name="lastName" label="Last Name" component={this.renderField} type="text"/>
@@ -62,4 +73,4 @@ class ContactForm extends Component {
   }
 }
 
-export default reduxForm({form: 'contact'})(ContactForm)
+export default reduxForm({form: 'contact', validate})(ContactForm)

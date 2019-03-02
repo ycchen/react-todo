@@ -10,6 +10,13 @@ export default function contactReducer(state = initialState.contactState, action
         ...state,
         contact: {}
       }
+    case 'SAVE_CONTACT':
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload],
+        errors: {},
+        loading: false
+      }
     case 'DELETE_CONTACT':
     const id = action.payload.contact.id
       return {

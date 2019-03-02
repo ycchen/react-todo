@@ -6,6 +6,7 @@ export default function ContactList({contacts, deleteContact}) {
   console.log('Inside of ContactList contacts', contacts.length);
 
   const cards = () => {
+    console.log('contacts', contacts);
     return contacts.map( contact => {
       return (
         <ContactCard key={contact.id} contact={contact} deleteContact={deleteContact} />

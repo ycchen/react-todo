@@ -3,13 +3,13 @@ import { Card, Button, Icon, Image} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 export default function ContactCard({contact, deleteContact}) {
-  const { id, first_name, last_name, phone, email, avator } = contact
+  const { id, firstName, lastName, phone, email, avator } = contact
   return (
     <Card>
       <Card.Content>
         <Image floated='right' size='mini' src={avator} />
         <Card.Header>
-          { first_name } { last_name }
+          { firstName } { lastName }
         </Card.Header>
         <Card.Description>
           <p><Icon name='phone'>{ phone }</Icon></p>
