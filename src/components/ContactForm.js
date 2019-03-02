@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Field, reduxForm } from 'redux-form'
 class ContactForm extends Component {
   constructor(props) {
     super(props)
@@ -8,45 +8,40 @@ class ContactForm extends Component {
        contact: {}
     }
   }
+  submit = (values) => {
+    console.log('inside of the contactForm')
+    console.log(values)
+  }
   
   render() {
-    const { contact } = this.props
-    console.log('contact is ', contact)
     return (
-      <div>
-        <form>
-          <input
-            className="form-control"
-            type="text"
-            placeholder="first name"
-            name="first_name"
-            value={contact.first_name}
-            />
-          <input
-            className="form-control"
-            type="text"
-            placeholder="last name"
-            name="last_name"
-            value={contact.last_name}
-            />
-          <input
-            className="form-control"
-            type="text"
-            placeholder="first.last@domain.com"
-            name="email"
-            value={contact.email}
-            />
-          <input
-            className="form-control"
-            type="text"
-            placeholder="1-703-123-4567"
-            name="phone"
-            value={contact.phone}
-            />
-        </form>
-      </div>
+      <form onSubmit={this.props.handleSubmit(this.submit)}>
+       <label htmlFor="firstName">First Name</label>
+        <div>
+          <Field name="firstName" component="input" type="text"/>
+        </div>
+        <label htmlFor="lastName">Last Name</label>
+        <div>
+          <Field name="lastName" component="input" type="text"/>
+        </div>
+        <label htmlFor="phone">Phone</label>
+        <div>
+          <Field name="phone" component="input" type="text"/>
+        </div>
+        <label htmlFor="email">Email</label>
+        <div>
+          <Field name="email" component="input" type="text"/>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
     )
   }
 }
+
+ContactForm = reduxForm({
+  form: 'contact'
+})(ContactForm)
 
 export default ContactForm

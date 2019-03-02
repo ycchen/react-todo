@@ -26,6 +26,14 @@ export const fetchContacts = (contacts) => {
   }
 }
 
+export const newContact = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'NEW_CONTACT'
+    })
+  }
+}
+
 export const fetchContact = (id) => {
   console.log('========fetchContact action===== ', id)
   return (dispatch) => {

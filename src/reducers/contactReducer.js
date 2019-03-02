@@ -1,10 +1,15 @@
 import initialState from './initialState'
 
 export default function contactReducer(state = initialState.contactState, action) {
-  console.log('===action.type===', action.type)
+  // console.log('===action.type===', action.type)
   switch(action.type) {
     case 'ADD_CONTACT':
-    return state
+      return state
+    case 'NEW_CONTACT':
+      return {
+        ...state,
+        contact: {}
+      }
     case 'DELETE_CONTACT':
     const id = action.payload.contact.id
       return {

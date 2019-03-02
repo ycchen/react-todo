@@ -10,14 +10,14 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Container>
-          <div className="ui two item menu">
+          <div className="ui three item menu">
             <NavLink className="item" activeClassName="active" exact to="/">Todos List</NavLink>
-            {/* <NavLink className="item" activeClassName="active" exact to="/todos/new">Add Todo</NavLink> */}
             <NavLink className="item" activeClassName="active" exact to="/contacts">Contacts List</NavLink>
-            {/* <NavLink className="item" activeClassName="active" exact to="/contacts/new">Add Contact</NavLink> */}
+            <NavLink className="item" activeClassName="active" exact to="/contacts/new">Add Contact</NavLink>
           </div>
           <Route exact path="/" component={TodoPage} />
           <Route exact path="/contacts" component={ContactPage} />
+          <Route exact path="/contacts/new" component={ContactFormPage} />
           <Route exact path="/contacts/edit/:id" component={ContactFormPage} />
         </Container>
       </BrowserRouter>
