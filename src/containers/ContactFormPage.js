@@ -21,7 +21,7 @@ class ContactFormPage extends React.Component {
     
     return (
       <div>
-        <ContactForm contact={this.props.contact} onSubmit={this.submit} />
+        <ContactForm contact={this.props.contact}/>
       </div>
     )
   }

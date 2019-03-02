@@ -1,12 +1,36 @@
 import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, SubmissionError } from 'redux-form'
 import { Form, Grid, Button } from 'semantic-ui-react';
 
+// decompose `values` to {firstName, lastName, phone, and email}
+// set default as empty firstName=''
+// {firstName='', lastName='', phone='', email=''}
 const submit = (values) => {
-  console.log('inside of the contactForm')
-  console.log(values)
+  let errors = {}
+  let isError = false
+
+  if (!values.firstName) {
+    errors.firstName = {
+      message: 'Required'
+    }
+    isError = true
+  }
+  if (!values.lastName) {
+    errors.lastName = {
+      message: 'Required'
+    }
+    isError = true
+  }
+
+  if (isError) {
+    throw new SubmissionError(errors)
+  } else {
+    console.log('valid submission')
+    console.log(values)
+  }
+  // return errors
 }
-// decompose field to { input, label, type, meta: {touched, error}}
+// decompose props field to { input, label, type, meta: {touched, error}}
 const renderField = ({input, label, type, meta: { touched, error}}) => (
   <Form.Field className={{error:touched && error}}>
     <label>{label}</label>
