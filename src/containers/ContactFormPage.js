@@ -32,6 +32,11 @@ class ContactFormPage extends React.Component {
         })
     } else {
       console.log(`update existing contact ${contact.id}`)
+      return this.props.updateContact(contact)
+        .then(response => this.setState({ redirect:true}))
+        .catch(error => {
+          throw new SubmissionError(this.props.errors)
+        })
     }
   }
   render() {
@@ -67,7 +72,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return (
     bindActionCreators(
-      {fetchContact, newContact, saveContact}, 
+      {fetchContact, newContact, saveContact, updateContact}, 
       dispatch
     )
   )

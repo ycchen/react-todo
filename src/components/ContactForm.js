@@ -1,36 +1,35 @@
 import React, { Component } from 'react'
-import { Field, reduxForm, SubmissionError } from 'redux-form'
-import { Form, Grid, Button } from 'semantic-ui-react';
+import { Field, reduxForm } from 'redux-form'
+import { Form, Grid, Button } from 'semantic-ui-react'
+import classnames from 'classnames'
 
 // decompose `values` to {firstName, lastName, phone, and email}
 // set default as empty firstName=''
 // {firstName='', lastName='', phone='', email=''}
 const validate = (values) => {
-  let errors = {}
-  let isError = false
+  const errors = {}
 
   if (!values.firstName) {
     errors.firstName = {
       message: 'Required'
     }
-    isError = true
   }
   if (!values.lastName) {
     errors.lastName = {
       message: 'Required'
     }
-    isError = true
   }
-
-  // if (isError) {
-  //   throw new SubmissionError(errors)
-  // } else {
-  //   console.log('valid submission')
-  //   console.log(values)
-  // }
+  if (!values.email) {
+    errors.email = {
+      message: 'Required'
+    }
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = {
+      message: 'Invalid email address'
+    }
+  }
   return errors
 }
-// decompose props field to { input, label, type, meta: {touched, error}}
 
 class ContactForm extends Component {
   
@@ -44,8 +43,10 @@ class ContactForm extends Component {
       this.props.initialize(contact)
     }
   }
+
+  // decompose props field to { input, label, type, meta: {touched, error}}
   renderField = ({input, label, type, meta: { touched, error}}) => (
-    <Form.Field className={{error:touched && error}}>
+    <Form.Field className={classnames({error:touched && error})}>
       <label>{label}</label>
       <input {...input} placeholder={label} type={type} />
       { touched && error && <span className="error">{error.message}</span> }
@@ -53,7 +54,7 @@ class ContactForm extends Component {
   )
 
   render() {
-    const { handleSubmit, contact } = this.props
+    const { handleSubmit, pristine, submitting, reset, contact } = this.props
     return (
       <Grid centered columns={2}>
         <Grid.Column>
@@ -65,7 +66,8 @@ class ContactForm extends Component {
           </Form.Group>
           <Field name="phone" label="Phone" component={this.renderField} type="text"/>
           <Field name="email" label="Email" component={this.renderField} type="text"/>
-          <Button primary type="submit">Save</Button>
+          <Button primary type="submit" disabled={pristine || submitting}>{ contact.id? 'Update' : 'Save'}</Button>
+          <Button negative disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
         </Form>
         </Grid.Column>
       </Grid>

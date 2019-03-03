@@ -46,6 +46,22 @@ export const saveContact = (contact) => {
     
   }
 }
+
+export const updateContact = (contact) => {
+  return(dispatch) => {
+    return axios.put(`${apiUrl}/${contact.id}`, contact)
+      .then(response => {
+        console.log('update contact', response.data);
+        dispatch({
+          type: 'UPDATE_CONTACT',
+          payload:response.data
+        })
+      })
+      .catch(error => {
+        throw(error)
+      })
+  }
+}
 export const fetchContact = (id) => {
   console.log('========fetchContact action===== ', id)
   return (dispatch) => {

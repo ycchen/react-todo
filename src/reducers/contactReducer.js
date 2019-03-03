@@ -17,6 +17,15 @@ export default function contactReducer(state = initialState.contactState, action
         errors: {},
         loading: false
       }
+    case 'UPDATE_CONTACT':
+    const contact = action.payload
+    console.log('after update contact =====', contact);
+      return {
+        ...state,
+        contacts: state.contacts.map(item => item.id === contact.id ? contact : item),
+        errors: {},
+        loading: false
+      }
     case 'DELETE_CONTACT':
     const id = action.payload.contact.id
       return {
@@ -27,7 +36,6 @@ export default function contactReducer(state = initialState.contactState, action
       return state
     case 'FETCH_CONTACT':
     console.log('===FETCH_CONTACT===', action.payload)
-    console.log('===action.payload===', action.payload)
     console.log('===state.contacts===', state.contacts)
       return {
         ...state,
@@ -35,7 +43,6 @@ export default function contactReducer(state = initialState.contactState, action
       }
     case 'FETCH_CONTACTS':
     console.log('===action.payload===', action.payload)
-    console.log('===current state===', state)
       return {
         ...state,
         contacts: action.payload,

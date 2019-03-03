@@ -78,6 +78,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
   
   `npm install --save lodash`
   `yarn add redux-form`
+  `yarn add classnames`
 ```
 
 #### Redux
