@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createTodo, fetchAllTodos, deleteTodo } from '../actions'
+import { createTodo, fetchAllTodos, deleteTodo } from '../actions/todoActions'
 import TodoForm from '../components/TodoForm'
 import TodoList from '../components/TodoList'
 import { bindActionCreators } from 'redux'
@@ -14,7 +14,8 @@ class TodoPage extends React.Component {
     console.log('TodoPage ====== this.props.todos', this.props.todos);
     return (
       <div>
-        <h1>List of Todos ({this.props.todos.length})</h1>
+        <h1>Todo Page</h1>
+        <h4>Todos ({this.props.todos.length})</h4>
         <TodoForm addTodo={this.props.createTodo} />
         There are {this.props.todos.length} todos
         <TodoList todos={this.props.todos} deleteTodo={this.props.deleteTodo} />
