@@ -80,6 +80,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
   `yarn add redux-form`
   `yarn add classnames`
 ```
+#### run app
+```
+`yarn start`
+```
 
 #### Redux
 
